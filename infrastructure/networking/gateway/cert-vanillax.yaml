@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cert-vanillax
+  name: cert-h4z
   namespace: gateway
   annotations:
     argocd.argoproj.io/sync-wave: "2" # Deploy after ClusterIssuer (wave 1)
@@ -9,13 +9,13 @@ metadata:
     argocd.argoproj.io/compare-options: ServerSideDiff=true
 spec:
   dnsNames:
-    - "*.vanillax.xyz"
-    - vanillax.xyz
+    - "*.h4z.dev"
+    - h4z.dev
   issuerRef:
     group: cert-manager.io
     kind: ClusterIssuer
     name: cloudflare-cluster-issuer
-  secretName: cert-vanillax
+  secretName: cert-h4z
   # Best practices from cert-manager documentation
   privateKey:
     algorithm: RSA
