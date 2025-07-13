@@ -112,11 +112,23 @@ sudo apt update && sudo apt install -y \
   zfsutils-linux \
   nfs-kernel-server \
   cifs-utils \
-  open-iscsi  # Optional but recommended
-
+  open-iscsi  \
+  linux-modules-extra-raspi \
+  iptables \
+  iptables-persistent \
+  curl \
+  git \
+# Optional but recommended
+# Enable memory cgroups
+sudo nano /boot/firmware/cmdline.txt
+# cgroup_memory=1 cgroup_enable=memory # 👈 Add this to the end of the existing line
 # Critical kernel modules for Cilium
 sudo modprobe iptable_raw xt_socket
 echo -e "xt_socket\niptable_raw" | sudo tee /etc/modules-load.d/cilium.conf
+sudo dphys-swapfile swapoff
+sudo dphys-swapfile uninstall
+sudo systemctl disable dphys-swapfile
+sudo reboot
 ```
 
 ### 2. K3s Installation
