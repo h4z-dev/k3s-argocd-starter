@@ -108,7 +108,7 @@ graph TD
 ### 1. System Setup
 ```bash
 # Essential packages (ZFS/NFS/iSCSI)
-sudo apt update && sudo apt install -y \
+sudo apt update && sudo apt upgrade -y && sudo apt install -y \
   zfsutils-linux \
   nfs-kernel-server \
   cifs-utils \
@@ -128,6 +128,8 @@ echo -e "xt_socket\niptable_raw" | sudo tee /etc/modules-load.d/cilium.conf
 sudo dphys-swapfile swapoff
 sudo dphys-swapfile uninstall
 sudo systemctl disable dphys-swapfile
+# Install Helm
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 sudo reboot
 ```
 
@@ -227,9 +229,6 @@ ip a
 
 ### 4. GitOps Setup (Argo CD - Part 1/2)
 ```bash
-# Install Helm
-curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-
 # Gateway API CRDs
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/experimental-install.yaml
