@@ -120,7 +120,7 @@ sudo apt update && sudo apt upgrade -y && sudo apt install -y \
   git \
 # Optional but recommended
 # Enable memory cgroups
-sudo nano /boot/firmware/cmdline.txt
+#sudo nano /boot/firmware/cmdline.txt
 # cgroup_memory=1 cgroup_enable=memory # 👈 Add this to the end of the existing line
 # Critical kernel modules for Cilium
 sudo modprobe iptable_raw xt_socket
@@ -130,13 +130,14 @@ sudo dphys-swapfile uninstall
 sudo systemctl disable dphys-swapfile
 # Install Helm
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+git clone https://github.com/h4z-dev/k3s-argocd-starter.git -j2
 sudo reboot
 ```
 
 ### 2. K3s Installation
 ```bash
 # Customize these values!
-export SETUP_NODEIP=192.168.1.21  # Your node IP
+export SETUP_NODEIP=192.168.101.21  # Your node IP
 export SETUP_CLUSTERTOKEN=randomtokensecret12343  # Strong token
 
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.33.1+k3s1" \
